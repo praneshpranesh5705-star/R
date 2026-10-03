@@ -1,0 +1,5 @@
+-- FlowDesk database schema. The Vercel API also creates these tables automatically.
+CREATE TABLE IF NOT EXISTS customers (id SERIAL PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE, created_at TIMESTAMPTZ DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS orders (id SERIAL PRIMARY KEY, code TEXT UNIQUE NOT NULL, customer_name TEXT NOT NULL, service TEXT NOT NULL, amount NUMERIC(12,2) NOT NULL DEFAULT 0, status TEXT NOT NULL DEFAULT 'Pending', created_at TIMESTAMPTZ DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS bookings (id SERIAL PRIMARY KEY, customer_name TEXT NOT NULL, service TEXT NOT NULL, booking_date DATE NOT NULL, status TEXT NOT NULL DEFAULT 'Scheduled', created_at TIMESTAMPTZ DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS inventory (id SERIAL PRIMARY KEY, item TEXT NOT NULL, quantity INTEGER NOT NULL DEFAULT 0, reorder_level INTEGER NOT NULL DEFAULT 10, updated_at TIMESTAMPTZ DEFAULT NOW());
